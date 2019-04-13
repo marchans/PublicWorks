@@ -7,13 +7,25 @@ import database.data.users.User;
 @Entity
 @Table(name="customers")
 public class Customer {
-	
+
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "customer_id")
 	private User user;
+
+	@Column(name = "passport")
+	private String passport;
 	
 	@Column(name = "itn")
 	private int itn;
+
+	@Column(name = "county")
+	private String county;
+
+	@Column(name = "city")
+	private String city;
+
+	@Column(name = "district")
+	private String district;
 	
 	@Column(name = "street")
 	private String street;
@@ -23,15 +35,6 @@ public class Customer {
 	
 	@Column(name = "apt_number")
 	private int aptNumber;
-	
-	@Column(name = "district")
-	private String district;
-	
-	@Column(name = "city")
-	private String city;
-	
-	@Column(name = "county")
-	private String county;
 	
 	@Column(name = "area")
 	private double area;
@@ -52,6 +55,21 @@ public class Customer {
 	public void setItn(int itn) {
 		this.itn = itn;
 	}
+
+	/**
+	 * @return the passport
+	 */
+	public String getPassport() {
+		return passport;
+	}
+
+	/**
+	 * @param passport the passport to set
+	 */
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
 
 	/**
 	 * @return the street

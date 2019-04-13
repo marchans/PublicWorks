@@ -11,7 +11,7 @@ public class Request {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "request_id")
+	@Column(name = "req_id")
 	private int requestId;
 	
 	@Column(name = "status")
@@ -21,7 +21,7 @@ public class Request {
 	private String message;
 	
 	@ManyToOne
-	@JoinColumn(name = "customed_id")
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
 	@ManyToOne
