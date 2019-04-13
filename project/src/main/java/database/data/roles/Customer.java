@@ -8,6 +8,11 @@ import database.data.users.User;
 @Table(name="customers")
 public class Customer {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+	
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "customer_id")
 	private User user;
@@ -207,14 +212,17 @@ public class Customer {
 				+ ", accountNumber=" + accountNumber + "]";
 	}
 
-	@Id
-	private String id;
-
-	public String getId() {
+	/**
+	 * @return the id
+	 */
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
 		this.id = id;
 	}
 }

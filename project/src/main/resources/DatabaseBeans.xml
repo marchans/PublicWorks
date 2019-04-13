@@ -19,9 +19,10 @@
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://192.168.43.72:3306/publicworks" />
-		<property name="username" value="publicworks" />
-		<property name="password" value="publicworks1" />
+			value="jdbc:mysql://localhost:3306/publicworks" /> <!-- change to localhost/db server ip and your account credentials to run 
+			properly -->
+		<property name="username" value="student" />
+		<property name="password" value="student123A" />
 		<property name="initialSize" value="5" />
 		<property name="maxTotal" value="10" />
 	</bean>
@@ -62,6 +63,7 @@
 	<bean id="serviceWorkersWorker"
 		class="database.workers.ServiceWorkersWorker" />
 	<bean id="usersWorker" class="database.workers.UsersWorker" />
+	<bean id="loginsWorker" class="database.workers.LoginsWorker" />
 
 
 	<!-- dao beans definition -->

@@ -8,11 +8,14 @@ import database.data.users.User;
 public class UsersWorker {
 	@Autowired
 	UsersDao usersDao;
-	
+
 	public User addUser(User user) {
 		user = usersDao.addUser(user);
 		System.out.println(user);
 		return user;
 	}
 
+	public User getUserFromDb(int userId) {
+		return usersDao.getUser(userId);
+	}
 }

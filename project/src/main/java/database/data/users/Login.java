@@ -6,7 +6,12 @@ import javax.persistence.*;
 @Table(name = "logins")
 public class Login {
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+	
+	@OneToOne(cascade={CascadeType.MERGE})
 	@JoinColumn(name = "user_id")
 	private User user;
 	
@@ -83,14 +88,11 @@ public class Login {
 		return "Login [user=" + user + ", login=" + login + ", password=" + password + ", role=" + role + "]";
 	}
 
-	@Id
-	private String id;
-
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 }

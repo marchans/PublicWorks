@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", phone=" + phone + "]";
+	}
+
 	@Id
 	@GeneratedValue
 	@Column(name = "user_id")
@@ -91,6 +100,5 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
 	
 }
