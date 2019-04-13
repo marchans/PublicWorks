@@ -1,6 +1,8 @@
-package database.data;
+package database.data.roles;
 
 import javax.persistence.*;
+
+import database.data.users.User;
 
 @Entity
 @Table(name="customers")

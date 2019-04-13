@@ -1,4 +1,4 @@
-package database.data;
+package database.data.users;
 
 import javax.persistence.*;
 
