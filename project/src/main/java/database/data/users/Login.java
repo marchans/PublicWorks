@@ -82,5 +82,15 @@ public class Login {
 	public String toString() {
 		return "Login [user=" + user + ", login=" + login + ", password=" + password + ", role=" + role + "]";
 	}
-	
+
+	@Id
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

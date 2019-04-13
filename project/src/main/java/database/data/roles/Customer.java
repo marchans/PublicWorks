@@ -206,5 +206,15 @@ public class Customer {
 				+ aptNumber + ", district=" + district + ", city=" + city + ", county=" + county + ", area=" + area
 				+ ", accountNumber=" + accountNumber + "]";
 	}
-	
+
+	@Id
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }
