@@ -38,20 +38,6 @@ public class Customer {
 	private int accountNumber;
 
 	/**
-	 * @return the customerId
-	 */
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	/**
-	 * @param customerId the customerId to set
-	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	/**
 	 * @return the itn
 	 */
 	public int getItn() {
@@ -177,8 +163,28 @@ public class Customer {
 		this.accountNumber = accountNumber;
 	}
 
-	
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
 
-	
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Customer [user=" + user + ", itn=" + itn + ", street=" + street + ", number=" + number + ", aptNumber="
+				+ aptNumber + ", district=" + district + ", city=" + city + ", county=" + county + ", area=" + area
+				+ ", accountNumber=" + accountNumber + "]";
+	}
 	
 }
