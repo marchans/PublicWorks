@@ -3,9 +3,9 @@ package database.dao.api;
 import database.data.roles.Customer;
 
 public interface CustomersDao {
-	Customer addCustomer(Customer Customer);
+	Customer addCustomer(Customer customer);
 
 	Customer getCustomer(int id);
 
-	void saveCustomer(Customer Customer);
+	void saveCustomer(Customer customer);
 }

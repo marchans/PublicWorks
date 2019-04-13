@@ -3,9 +3,9 @@ package database.dao.api;
 import database.data.roles.workers.ServiceWorker;
 
 public interface ServiceWorkersDao {
-	ServiceWorker addServiceWorker(ServiceWorker ServiceWorker);
+	ServiceWorker addServiceWorker(ServiceWorker serviceWorker);
 
 	ServiceWorker getServiceWorker(int id);
 
-	void saveServiceWorker(ServiceWorker ServiceWorker);
+	void saveServiceWorker(ServiceWorker serviceWorker);
 }
