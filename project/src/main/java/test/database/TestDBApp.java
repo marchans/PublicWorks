@@ -1,22 +1,16 @@
 package test.database;
 
-import database.workers.DataBaseWorker;
 import database.data.roles.Customer;
 import database.workers.CustomersWorker;
 import database.workers.DataBaseWorker;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import database.data.roles.Customer;
 import database.data.users.Login;
 import database.data.users.User;
-import database.workers.CustomersWorker;
 import database.workers.LoginsWorker;
 import database.workers.UsersWorker;
 
-import java.util.List;
-
-import javax.xml.crypto.Data;
 import java.util.List;
 
 public class TestDBApp {
@@ -59,20 +53,19 @@ public class TestDBApp {
 //        CustomersWorker cuw = (CustomersWorker) context.getBean("customersWorker");
 //        cuw.addCustomer(cu);
 
-        DataBaseWorker db = (DataBaseWorker) context.getBean("dataBaseWorker");
+		DataBaseWorker db = (DataBaseWorker) context.getBean("dataBaseWorker");
 
-        System.out.println("Get all users from database as strings test: ");
-        db.getAllUsersFromDatabase();
+		System.out.println("Get all users from database as strings test: ");
+		db.getAllUsersFromDatabase();
 
-        System.out.println("Get all users from database as Gson test: ");
-        System.out.println(db.getAllUsersFromDatabaseGson());
+		System.out.println("Get all users from database as Gson test: ");
+		System.out.println(db.getAllUsersFromDatabaseGson());
 
-        System.out.println("Get all users from database as deserialized Gson test: ");
-        List<User> list = db.getAllUsersFromDatabaseGsonDeserialized();
-        for(User u : list){
-            System.out.println(u.toString());
-        }
-	
+		System.out.println("Get all users from database as deserialized Gson test: ");
+		List<User> list = db.getAllUsersFromDatabaseGsonDeserialized();
+		for(User user : list){
+			System.out.println(user.toString());
+		}
+
 	}
-
 }
