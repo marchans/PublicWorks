@@ -22,7 +22,7 @@
 			value="jdbc:mysql://localhost:3306/publicworks" /> <!-- change to localhost/db server ip and your account credentials to run 
 			properly -->
 		<property name="username" value="root" />
-		<property name="password" value="N989898a" />
+		<property name="password" value="root" />
 		<property name="initialSize" value="5" />
 		<property name="maxTotal" value="10" />
 	</bean>
