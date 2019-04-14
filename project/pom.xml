@@ -38,6 +38,44 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!-- Spring Security connection -->
+		<dependency>
+<groupId>org.springframework.security</groupId>
+<artifactId>spring-security-core</artifactId>
+<version>3.2.5.RELEASE</version>
+</dependency>
+<dependency>
+<groupId>org.springframework.security</groupId>
+<artifactId>spring-security-config</artifactId>
+<version>3.2.5.RELEASE</version>
+</dependency>
+<dependency>
+<groupId>org.springframework.security</groupId>
+<artifactId>spring-security-web</artifactId>
+<version>3.2.5.RELEASE</version>
+</dependency>
+		
+<dependency>
+
+<groupId>org.springframework.security</groupId>
+
+<artifactId>spring-security-taglibs</artifactId>
+
+<version>3.2.5.RELEASE</version>
+
+</dependency>
+
+<dependency>
+
+<groupId>jstl</groupId>
+
+<artifactId>jstl</artifactId>
+
+<version>1.2</version>
+
+</dependency>
+		
 
 		<!-- DataBase connections -->
 
@@ -97,6 +135,7 @@
 			<version>2.8.5</version>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>project</finalName>
 		<plugins>
@@ -108,6 +147,13 @@
 					<target>6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+    </plugin>
 		</plugins>
 	</build>
 </project>
