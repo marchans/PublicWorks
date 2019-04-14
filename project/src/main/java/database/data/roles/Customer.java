@@ -13,7 +13,7 @@ public class Customer {
 	@Column(name = "id")
 	private int id;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade={CascadeType.MERGE})
 	@JoinColumn(name = "customer_id")
 	private User user;
 
