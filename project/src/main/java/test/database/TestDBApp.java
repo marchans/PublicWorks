@@ -24,17 +24,17 @@ public class TestDBApp {
 		User u = new User();
 		u.setFirstName("Jay");
 		u.setLastName("Worker");
-		u.setEmail("jay@worker.gmail.com");
-		u.setPhone("0445554444");
+		u.setEmail("admin@worker.gmail.com");
+		u.setPhone("0445554446");
 
 		UsersWorker uw = (UsersWorker) context.getBean("usersWorker");
 		uw.addUser(u);
 
 		Login lu = new Login();
 		lu.setUser(u);
-		lu.setLogin("worker001");
-		lu.setPassword("boom");
-		lu.setRole("ROLE_WORKER");
+		lu.setLogin("adminushka");
+		lu.setPassword("slozna");
+		lu.setRole("ROLE_ADMIN");
 
 		LoginsWorker lw = (LoginsWorker) context.getBean("loginsWorker");
 		lw.addLogin(lu);
@@ -53,19 +53,19 @@ public class TestDBApp {
 //        cu.setStreet("Khreshchatyk");
 //        System.out.println(cu);
 		
-		Position p = new Position();
-		p.setPosition("Electrician");
-		
-		PositionsWorker pw = (PositionsWorker) context.getBean("positionsWorker");
-		pw.addPosition(p);
-		
-		ServiceWorker sw = new ServiceWorker();
-		sw.setUser(u);
-		sw.setPosition(p);
-
-        ServiceWorkersWorker swow = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
-        swow.addServiceWorker(sw);
-        
+//		Position p = new Position();
+//		p.setPosition("Electrician");
+//		
+//		PositionsWorker pw = (PositionsWorker) context.getBean("positionsWorker");
+//		pw.addPosition(p);
+//		
+//		ServiceWorker sw = new ServiceWorker();
+//		sw.setUser(u);
+//		sw.setPosition(p);
+//
+//        ServiceWorkersWorker swow = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
+//        swow.addServiceWorker(sw);
+//        
 //        CustomersWorker cuw = (CustomersWorker) context.getBean("customersWorker");
 //        cuw.addCustomer(cu);
 //

@@ -35,7 +35,7 @@ public class MainController {
 
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
 
@@ -54,18 +54,21 @@ public class MainController {
 	}
 	
 	//for 403 access denied page
-	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	@RequestMapping(value = "/403", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView accesssDenied() {
 
 		ModelAndView model = new ModelAndView();
 		
 		//check if user is login
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.print(auth.getName());
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			System.out.println("User has authorities: " );
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			
 			System.out.println(userDetail);
 		
-			model.addObject("username", userDetail.getUsername());
+			model.addObject("login", userDetail.getUsername());
 			
 		}
 		

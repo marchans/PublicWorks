@@ -23,6 +23,10 @@ public class Login {
 	
 	@Column(name = "role")
 	private String role;
+	
+	
+	
+	
 
 	/**
 	 * @return the user

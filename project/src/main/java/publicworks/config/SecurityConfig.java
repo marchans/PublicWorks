@@ -17,11 +17,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	DataSource dataSource;
 	
 	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
 		auth.jdbcAuthentication().dataSource(dataSource)
-			.usersByUsernameQuery("select username,password from logins where username=?")
-			.authoritiesByUsernameQuery("select username, role from logins where username=?");
+			.usersByUsernameQuery("select login, password, enabled from logins where login = ?")
+			.authoritiesByUsernameQuery("select login, role from logins where login = ?");
 	}	
 	
 	@Override
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and()
 				.formLogin().loginPage("/login").failureUrl("/login?error")
-					.usernameParameter("username").passwordParameter("password")
+					.usernameParameter("login").passwordParameter("password")
 			.and()
 				.logout().logoutSuccessUrl("/login?logout")
 			.and()
