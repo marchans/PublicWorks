@@ -10,10 +10,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import database.data.users.Login;
 import database.data.users.User;
+import database.data.utilities.Utility;
+import database.data.utilities.UtilityBill;
 import database.workers.LoginsWorker;
 import database.workers.PositionsWorker;
 import database.workers.ServiceWorkersWorker;
 import database.workers.UsersWorker;
+import database.workers.UtilitiesWorker;
+import database.workers.UtilityBillsWorker;
 
 import java.util.List;
 
@@ -21,23 +25,23 @@ public class TestDBApp {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
-		User u = new User();
-		u.setFirstName("Jay");
-		u.setLastName("Worker");
-		u.setEmail("jay@worker.gmail.com");
-		u.setPhone("0445554444");
-
-		UsersWorker uw = (UsersWorker) context.getBean("usersWorker");
-		uw.addUser(u);
-
-		Login lu = new Login();
-		lu.setUser(u);
-		lu.setLogin("worker001");
-		lu.setPassword("boom");
-		lu.setRole("ROLE_WORKER");
-
-		LoginsWorker lw = (LoginsWorker) context.getBean("loginsWorker");
-		lw.addLogin(lu);
+//		User u = new User();
+//		u.setFirstName("Jay");
+//		u.setLastName("Worker");
+//		u.setEmail("jay@worker.gmail.com");
+//		u.setPhone("0445554444");
+//
+//		UsersWorker uw = (UsersWorker) context.getBean("usersWorker");
+//		uw.addUser(u);
+//
+//		Login lu = new Login();
+//		lu.setUser(u);
+//		lu.setLogin("worker001");
+//		lu.setPassword("boom");
+//		lu.setRole("ROLE_WORKER");
+//
+//		LoginsWorker lw = (LoginsWorker) context.getBean("loginsWorker");
+//		lw.addLogin(lu);
 
 //        Customer cu = new Customer();
 //        cu.setUser(u);
@@ -52,22 +56,44 @@ public class TestDBApp {
 //        cu.setPassport("A1111");
 //        cu.setStreet("Khreshchatyk");
 //        System.out.println(cu);
-		
-		Position p = new Position();
-		p.setPosition("Electrician");
-		
-		PositionsWorker pw = (PositionsWorker) context.getBean("positionsWorker");
-		pw.addPosition(p);
-		
-		ServiceWorker sw = new ServiceWorker();
-		sw.setUser(u);
-		sw.setPosition(p);
 
-        ServiceWorkersWorker swow = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
-        swow.addServiceWorker(sw);
-        
-//        CustomersWorker cuw = (CustomersWorker) context.getBean("customersWorker");
-//        cuw.addCustomer(cu);
+//		Position p = new Position();
+//		p.setPosition("Electrician");
+//		
+//		PositionsWorker pw = (PositionsWorker) context.getBean("positionsWorker");
+//		pw.addPosition(p);
+//		
+//		ServiceWorker sw = new ServiceWorker();
+//		sw.setUser(u);
+//		sw.setPosition(p);
+//
+//        ServiceWorkersWorker swow = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
+//       swow.addServiceWorker(sw);
+
+		CustomersWorker cuw = (CustomersWorker) context.getBean("customersWorker");
+
+		Utility u = new Utility();
+		u.setName("Cold water");
+		u.setPrice(2.34);
+
+		UtilitiesWorker uw = (UtilitiesWorker) context.getBean("utilitiesWorker");
+		uw.addUtility(u);
+
+		UtilityBill ub = new UtilityBill();
+		Customer c = cuw.getCustomerByIdFromDb(1);
+
+		ub.setCustomer(c);
+//		
+//		u = uw.getUtilityFromDb(0);
+//		
+		System.out.println(u);
+//		
+		ub.setUtility(u);
+		ub.setAmount(3.14);
+//		
+		UtilityBillsWorker ubw = (UtilityBillsWorker) context.getBean("utilityBillsWorker");
+		ubw.addUtilityBill(ub);
+
 //
 //		DataBaseWorker db = (DataBaseWorker) context.getBean("dataBaseWorker");
 //

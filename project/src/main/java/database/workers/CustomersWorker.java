@@ -14,4 +14,8 @@ public class CustomersWorker {
 		System.out.println(customer);
 		return customer;
 	}
+	
+	public Customer getCustomerByIdFromDb(int id) {
+		return customersDao.getCustomer(id);
+	}
 }

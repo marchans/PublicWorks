@@ -1,8 +1,12 @@
 package database.data.roles;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.*;
 
 import database.data.users.User;
+import database.data.utilities.UtilityBill;
 
 @Entity
 @Table(name="customers")
@@ -47,9 +51,16 @@ public class Customer {
 	@Column(name = "account_number")
 	private int accountNumber;
 
+	@OneToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id")
+	@Column(name = "bills")
+	@ElementCollection(targetClass = UtilityBill.class)
+	private Collection<UtilityBill> utilityBills = new ArrayList<UtilityBill>();
+	
 	/**
 	 * @return the itn
 	 */
+	@Column(name = "itn")
 	public int getItn() {
 		return itn;
 	}
@@ -57,6 +68,7 @@ public class Customer {
 	/**
 	 * @param itn the itn to set
 	 */
+	@Column(name = "itn")
 	public void setItn(int itn) {
 		this.itn = itn;
 	}
@@ -64,6 +76,7 @@ public class Customer {
 	/**
 	 * @return the passport
 	 */
+	@Column(name = "passport")
 	public String getPassport() {
 		return passport;
 	}
@@ -71,6 +84,7 @@ public class Customer {
 	/**
 	 * @param passport the passport to set
 	 */
+	@Column(name = "passport")
 	public void setPassport(String passport) {
 		this.passport = passport;
 	}
@@ -79,6 +93,7 @@ public class Customer {
 	/**
 	 * @return the street
 	 */
+	@Column(name = "street")
 	public String getStreet() {
 		return street;
 	}
@@ -86,6 +101,7 @@ public class Customer {
 	/**
 	 * @param street the street to set
 	 */
+	@Column(name = "street")
 	public void setStreet(String street) {
 		this.street = street;
 	}
@@ -93,6 +109,7 @@ public class Customer {
 	/**
 	 * @return the number
 	 */
+	@Column(name="number")
 	public int getNumber() {
 		return number;
 	}
@@ -100,6 +117,7 @@ public class Customer {
 	/**
 	 * @param number the number to set
 	 */
+	@Column(name = "number")
 	public void setNumber(int number) {
 		this.number = number;
 	}
@@ -107,6 +125,7 @@ public class Customer {
 	/**
 	 * @return the aptNumber
 	 */
+	@Column(name = "apt_number")
 	public int getAptNumber() {
 		return aptNumber;
 	}
@@ -114,6 +133,7 @@ public class Customer {
 	/**
 	 * @param aptNumber the aptNumber to set
 	 */
+	@Column(name = "apt_number")
 	public void setAptNumber(int aptNumber) {
 		this.aptNumber = aptNumber;
 	}
@@ -121,6 +141,7 @@ public class Customer {
 	/**
 	 * @return the district
 	 */
+	@Column(name = "district")
 	public String getDistrict() {
 		return district;
 	}
@@ -128,6 +149,7 @@ public class Customer {
 	/**
 	 * @param district the district to set
 	 */
+	@Column(name = "district")
 	public void setDistrict(String district) {
 		this.district = district;
 	}
@@ -135,6 +157,7 @@ public class Customer {
 	/**
 	 * @return the city
 	 */
+	@Column(name = "city")
 	public String getCity() {
 		return city;
 	}
@@ -142,6 +165,7 @@ public class Customer {
 	/**
 	 * @param city the city to set
 	 */
+	@Column(name = "city")
 	public void setCity(String city) {
 		this.city = city;
 	}
@@ -149,6 +173,7 @@ public class Customer {
 	/**
 	 * @return the county
 	 */
+	@Column(name = "county")
 	public String getCounty() {
 		return county;
 	}
@@ -156,6 +181,7 @@ public class Customer {
 	/**
 	 * @param county the county to set
 	 */
+	@Column(name = "county")
 	public void setCounty(String county) {
 		this.county = county;
 	}
@@ -163,6 +189,7 @@ public class Customer {
 	/**
 	 * @return the area
 	 */
+	@Column(name="area")
 	public double getArea() {
 		return area;
 	}
@@ -170,6 +197,7 @@ public class Customer {
 	/**
 	 * @param area the area to set
 	 */
+	@Column(name="area")
 	public void setArea(double area) {
 		this.area = area;
 	}
@@ -177,6 +205,7 @@ public class Customer {
 	/**
 	 * @return the accountNumber
 	 */
+	@Column(name="account_number")
 	public int getAccountNumber() {
 		return accountNumber;
 	}
@@ -184,6 +213,7 @@ public class Customer {
 	/**
 	 * @param accountNumber the accountNumber to set
 	 */
+	@Column(name="account_number")
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
@@ -191,6 +221,8 @@ public class Customer {
 	/**
 	 * @return the user
 	 */
+	@OneToOne(cascade={CascadeType.MERGE})
+	@JoinColumn(name = "customer_id")
 	public User getUser() {
 		return user;
 	}
@@ -198,23 +230,16 @@ public class Customer {
 	/**
 	 * @param user the user to set
 	 */
+
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Customer [user=" + user + ", itn=" + itn + ", street=" + street + ", number=" + number + ", aptNumber="
-				+ aptNumber + ", district=" + district + ", city=" + city + ", county=" + county + ", area=" + area
-				+ ", accountNumber=" + accountNumber + "]";
-	}
 
 	/**
 	 * @return the id
 	 */
+	@Id
 	public int getId() {
 		return id;
 	}
@@ -222,7 +247,42 @@ public class Customer {
 	/**
 	 * @param id the id to set
 	 */
+	@Id
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	/**
+	 * @return the utilityBills
+	 */
+	@OneToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id")
+	@Column(name = "bills")
+	@ElementCollection(targetClass = UtilityBill.class)
+	public Collection<UtilityBill> getUtilityBills() {
+		return utilityBills;
+	}
+
+	/**
+	 * @param utilityBills the utilityBills to set
+	 */
+	@OneToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id")
+	@Column(name = "bills")
+	@ElementCollection(targetClass = UtilityBill.class)
+	public void setUtilityBills(Collection<UtilityBill> utilityBills) {
+		this.utilityBills = utilityBills;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", user=" + user + ", passport=" + passport + ", itn=" + itn + ", county="
+				+ county + ", city=" + city + ", district=" + district + ", street=" + street + ", number=" + number
+				+ ", aptNumber=" + aptNumber + ", area=" + area + ", accountNumber=" + accountNumber + ", utilityBills="
+				+ utilityBills + "]";
+	}
+	
 }
