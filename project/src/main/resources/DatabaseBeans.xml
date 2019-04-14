@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- base package for component scan configuration -->
+	<context:component-scan
+		base-package="database.data" />
+
+	<tx:annotation-driven />
+
+	<!-- mysql connection -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/publicworks" /> <!-- change to localhost/db server ip and your account credentials to run 
+			properly -->
+		<property name="username" value="student" />
+		<property name="password" value="student123A" />
+		<property name="initialSize" value="5" />
+		<property name="maxTotal" value="10" />
+	</bean>
+
+	<!-- jpa container -->
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceXmlLocation"
+			value="persistence.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+	</bean>
+
+	<!-- jpa vendor adapter -->
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="MYSQL" />
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="false" />
+		<property name="databasePlatform"
+			value="org.hibernate.dialect.MySQLDialect" />
+	</bean>
+
+	<!-- persistence -->
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- worker beans definition -->
+	<bean id="customersWorker"
+		class="database.workers.CustomersWorker" />
+	<bean id="serviceWorkersWorker"
+		class="database.workers.ServiceWorkersWorker" />
+	<bean id="usersWorker" class="database.workers.UsersWorker" />
+	<bean id="loginsWorker" class="database.workers.LoginsWorker" />
+	<bean id="dataBaseWorker" class="database.workers.DataBaseWorker" />
+	<bean id="positionsWorker" class="database.workers.PositionsWorker" />
+
+
+	<!-- dao beans definition -->
+	<bean id="customersDao"
+		class="database.dao.implementation.CustomersDaoJPA" />
+	<bean id="serviceWorkersDao"
+		class="database.dao.implementation.ServiceWorkersDaoJPA" />
+	<bean id="usersDao"
+		class="database.dao.implementation.UsersDaoJPA" />
+	<bean id="loginsDao"
+		class="database.dao.implementation.LoginDaoJPA" />
+	<bean id="dataBaseWorkerDao" class="database.dao.implementation.DataBaseWorkerDaoJPA" />
+	<bean id="positionsDao" class="database.dao.implementation.PositionsDaoJPA" />
+
+</beans>
