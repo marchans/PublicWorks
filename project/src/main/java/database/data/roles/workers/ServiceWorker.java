@@ -12,11 +12,11 @@ public class ServiceWorker {
 	@Column(name = "worker_id")
 	private int workerId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "position_id")
 	private Position position;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name = "user_id")
 	private User user;
 
