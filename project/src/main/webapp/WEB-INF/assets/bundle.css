@@ -1,0 +1,449 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.disp-none {
+    display: none!important;
+}
+
+.conatiner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.main {
+    position: relative;
+    background-color: rgba(4, 32, 44, 0.5);
+    border-radius: 20px;
+    min-height: 70vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding-bottom: 30px;
+}
+
+.main__button-list {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #04202C;
+}
+
+.main__button-list-item {
+    margin: 0 30px;
+}
+
+.worker-registration {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 7px;
+    padding: 20px;
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
+}
+
+.worker-registration__label {
+    display: flex;
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: #04202C;
+}
+
+.worker-registration__title {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+
+.worker-registration__input {
+    flex-basis: 80%;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid gray;
+    transition: .3s ease-in-out;
+}
+
+.worker-registration__input:focus {
+    border-bottom: 2px solid #04202C;
+}
+
+.worker-registration__submit-button {
+    align-self: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 40px 40px #04202C inset, 0 0 0 0 #04202C;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+    transition: .15s ease-in-out;
+}
+
+.worker-registration__submit-button:hover {
+    box-shadow: 0 0 10px 0 #04202C  inset, 0 0 10px 4px #04202C ;
+    color: #04202C ;
+}
+
+.worker-edit {
+    display: flex;
+    min-height: 44px;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.worker-edit label {
+    font-size: 1rem;
+    color: black;
+    margin: 0 10px;
+}
+
+.worker-edit span {
+    cursor: text;
+}
+
+.worker-edit input:focus {
+    border-bottom: 2px solid white;
+}
+
+.worker-edit__save {
+    font-size: 0.7rem;
+    padding: 5px;
+    margin: 0 0 0 auto;
+}
+
+.requests {
+    padding: 20px;
+}
+
+.request__item {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.request__person {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto 0 20px;
+    font-size: 1.1rem;
+    color: #04202C;
+}
+
+.request_person-init {
+    font-weight: bold;
+    flex-basis: 50%;
+    padding: 5px;
+}
+
+.requests button {
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.requests--worker h2{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.requests--worker h3{
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.requests--worker .request--reason {
+    padding-right: 300px;
+}
+
+.requests--worker .request_person-init {
+    flex-basis: 0;
+}
+
+.requests--worker .request__person {
+    flex-direction: column;
+}
+
+.requests--worker .request__item {
+    padding: 20px 0;
+}
+
+.button {
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    min-width: 140px;
+    padding: 0 10px;
+    height: 45px;
+    line-height: 45px;
+    border: none;
+    border-radius: 45px;
+    margin: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0,0,0,.1);
+    transition: .3s;
+}
+
+.button:hover {
+    background: #04202C;
+    box-shadow: 0 15px 20px rgba(4, 32, 44,.4);
+    color: white;
+    transform: translateY(-5px);
+}
+
+.header {
+    position: relative;
+    background-color: rgba(4, 32, 44, 1);
+}
+
+.navbar {
+    display: flex;
+    min-height: 10vh;
+    color: white;
+}
+
+.navbar-brand {
+    margin: auto 10px;
+}
+
+.navbar-menu {
+    flex: 1;
+    display: flex;
+}
+
+.navbar-start {
+    display: flex;
+}
+
+.navbar-end {
+    display: flex;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.navbar-item {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-item:hover, .navbar-item:focus {
+    background-color: white;
+    color: rgba(4, 32, 44, 1);
+}
+
+.navbar-item:active {
+    opacity: 0.2;
+}
+
+.footer {
+    position: relative;
+    min-height: 10vh;
+    display: flex;
+    background-color: rgba(4, 32, 44, 1);
+    color: white;
+}
+
+.footer__copyright {
+    padding: 20px;
+    margin-right: auto;
+}
+
+.background-image {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("city.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 7px;
+    padding: 20px;
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
+}
+
+.payment-form__title{
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    color: #524f4e;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.payment-form__row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+.payment-form__input-title{
+    margin-right: 10px;
+}
+
+.payment-form__submit{
+    align-self: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 40px 40px #04202C inset, 0 0 0 0 #04202C;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+    transition: .15s ease-in-out;
+}
+
+.payment-form__submit:hover {
+    box-shadow: 0 0 10px 0 #04202C  inset, 0 0 10px 4px #04202C ;
+    color: #04202C ;
+}
+
+.payment-form-unit-price-js{
+    margin-left: 10px;
+}
+
+.payment-form-total-price-js{
+    margin-left: 10px;
+}
+
+.payment-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-list__item{
+    display: flex;
+    margin: 10px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.payment-list__column{
+    width: 25%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.declaration-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 7px;
+    padding: 20px;
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
+}
+
+.declaration-form__title{
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    color: #524f4e;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.declaration-form__row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+.declaration-form__input-title{
+    margin-right: 10px;
+}
+
+.declaration-form__textarea{
+    width: 100%;
+    height: 200px;
+}
+
+.declaration-form__submit{
+    font-size: 1.2rem;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 40px 40px #04202C inset, 0 0 0 0 #04202C;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+    transition: .15s ease-in-out;
+}
+
+.declaration-form__submit:hover {
+    box-shadow: 0 0 10px 0 #04202C  inset, 0 0 10px 4px #04202C ;
+    color: #04202C ;
+}
+
+.declaration-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.declaration-list__item{
+    display: flex;
+    margin: 10px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.declaration-list__column{
+    width: 50%;
+    font-family: 'Montserrat', sans-serif;
+}

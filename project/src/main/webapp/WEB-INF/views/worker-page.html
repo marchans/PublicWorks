@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ЖКХ</title>
+    <link rel="stylesheet" href="bundle.css">
+    <link rel="stylesheet" href="reset.css">
+</head>
+<body data-page="worker">
+<div class="background-image"></div>
+<header class="header">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a href="/">
+                <img src="logo.png" width="60" height="60">
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">
+                    Домой
+                </a>
+
+                <a class="navbar-item" href="/">
+                    Еще куданить
+                </a>
+
+                <a class="navbar-item" href="/">
+                    Сюда
+                </a>
+
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item" href="/">
+                    Выйти
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="conatiner main">
+    <ul class="main__button-list">
+        <li class="main__button-list-item">
+            <button class="button requests-but">Заявки пользователей</button>
+        </li>
+    </ul>
+    <div class="content">
+        <ul class="requests requests--worker disp-none">
+            <li class="request__item">
+                <div class="request__person">
+                    <h2>Заявка</h2>
+                    <div class="request_person-init"><h3>Имя:</h3> <span>Дима</span></div>
+                    <div class="request_person-init"><h3>Фамилия:</h3> <span>Рудяк</span></div>
+                    <div class="request_person-init"><h3>Мейл:</h3> <span>dima@pross.com</span></div>
+                    <div class="request_person-init"><h3>Телефон:</h3> <span>0768449324</span></div>
+                    <div class="request_person-init request--reason"><h3>Причина:</h3> <span>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum являеLorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum являе</span></div>
+                </div>
+                <button class="worker-registration__submit-button button--done disp-none">Сделано</button>
+                <button class="worker-registration__submit-button button--accept ">Принять</button>
+                <button class="worker-registration__submit-button button--decline disp-none">Отклонить</button>
+            </li>
+        </ul>
+    </div>
+</main>
+<footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2019 Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+    </span>
+    <div class="navbar-brand">
+        <a href="/">
+            <img src="logo.png" width="60" height="60">
+        </a>
+    </div>
+</footer>
+
+<script src="bundle.js"></script>
+</body>
+</html>
