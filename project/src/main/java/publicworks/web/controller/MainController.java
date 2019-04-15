@@ -1,4 +1,8 @@
 package publicworks.web.controller;
+import database.workers.DataBaseWorker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 @Controller
 public class MainController {
+
+	@Autowired private ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
+	DataBaseWorker dbw = (DataBaseWorker)context.getBean("dataBaseWorker");
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
@@ -32,6 +41,16 @@ public class MainController {
 		model.setViewName("admin");
 
 		return model;
+
+	}
+
+	@RequestMapping(value = "/admin/getWorkers", method = RequestMethod.GET)
+	public ModelAndView getWorkers() {
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("data", dbw.getAllWorkersFromDatabaseGson());
+
+		return mav;
 
 	}
 
@@ -70,9 +89,12 @@ public class MainController {
 			model.addObject("login", userDetail.getUsername());
 			
 		}
-		
-		model.setViewName("403");
-		return model;
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("key1", "value1");
+		mav.addObject("key2", "value2");
+
+		return mav;
 
 	}
 

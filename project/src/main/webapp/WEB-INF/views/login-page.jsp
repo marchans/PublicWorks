@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ЖКХ</title>
-    <link rel="stylesheet" href="../assets/bundle.css">
-    <link rel="stylesheet" href="../assets/reset.css">
+    <link rel="stylesheet" href="../../resources/css/bundle.css">
+    <link rel="stylesheet" href="../../resources/css/reset.css">
 </head>
 <body onload='document.loginForm.username.focus();'>
 

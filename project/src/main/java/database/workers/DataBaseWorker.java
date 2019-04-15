@@ -27,4 +27,16 @@ public class DataBaseWorker {
     public List<User> getAllUsersFromDatabaseGsonDeserialized(){
         return dataBaseWorkerDao.getAllUsersFromDatabaseGsonDeserialized();
     }
+
+    public String getAllUnverifiedUsersFromDatabaseGson(){
+        return dataBaseWorkerDao.getAllUnverifiedUsersFromDatabaseGson();
+    }
+
+    public String getAllWorkersFromDatabaseGson(){
+        return dataBaseWorkerDao.getAllWorkersFromDatabaseGson();
+    }
+
+    public void addNewWorkerToDatabase(JsonObject workerJson){
+        dataBaseWorkerDao.addNewWorkerToDatabase(workerJson);
+    }
 }

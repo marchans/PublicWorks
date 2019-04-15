@@ -29,15 +29,26 @@ public class TestDBApp {
 
 		UsersWorker uw = (UsersWorker) context.getBean("usersWorker");
 		uw.addUser(u);
-
-		Login lu = new Login();
-		lu.setUser(u);
-		lu.setLogin("adminushka");
-		lu.setPassword("slozna");
-		lu.setRole("ROLE_ADMIN");
-
-		LoginsWorker lw = (LoginsWorker) context.getBean("loginsWorker");
-		lw.addLogin(lu);
+//
+//		Login lu = new Login();
+//		lu.setUser(u);
+//		lu.setLogin("adminushka");
+//		lu.setPassword("slozna");
+//		lu.setRole("ROLE_ADMIN");
+//
+//		LoginsWorker lw = (LoginsWorker) context.getBean("loginsWorker");
+//		lw.addLogin(lu);
+//
+//		ServiceWorkersWorker sww = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
+//		ServiceWorker sw = new ServiceWorker();
+//		Position p = new Position();
+//		p.setPosition("Електрик");
+//		PositionsWorker pw = (PositionsWorker) context.getBean("positionsWorker");
+//		pw.addPosition(p);
+//		sw.setPosition(p);
+//		sw.setUser(u);
+//
+//		sww.addServiceWorker(sw);
 
 //        Customer cu = new Customer();
 //        cu.setUser(u);

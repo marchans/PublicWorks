@@ -3,7 +3,6 @@ package database.dao.implementation;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
 import database.data.users.User;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;

@@ -23,6 +23,9 @@ public class Login {
 	
 	@Column(name = "role")
 	private String role;
+
+	@Column(name="enabled")
+	private boolean enabled;
 	
 	
 	
@@ -98,5 +101,13 @@ public class Login {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }
