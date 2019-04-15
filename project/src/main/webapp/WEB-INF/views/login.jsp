@@ -2,6 +2,7 @@
 <%@page session="true"%>
 <html>
 <head>
+<%@ page isELIgnored="false" %>
 <title>Login Page</title>
 <style>
 .error {

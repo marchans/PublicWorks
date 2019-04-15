@@ -61,7 +61,6 @@ public class MainController {
 		
 		//check if user is login
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.print(auth.getName());
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			System.out.println("User has authorities: " );
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
