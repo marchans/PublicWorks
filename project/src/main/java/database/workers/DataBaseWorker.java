@@ -27,4 +27,5 @@ public class DataBaseWorker {
     public List<User> getAllUsersFromDatabaseGsonDeserialized(){
         return dataBaseWorkerDao.getAllUsersFromDatabaseGsonDeserialized();
     }
+    
 }

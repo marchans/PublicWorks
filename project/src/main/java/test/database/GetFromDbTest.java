@@ -14,7 +14,7 @@ public class GetFromDbTest {
 
 		CustomersWorker cuw = (CustomersWorker) context.getBean("customersWorker");
 
-		for (int i = 0; i < 6; ++i) {
+		for (int i = 0; i < 10; ++i) {
 			Customer c = cuw.getCustomerByIdFromDb(i);
 			if (c != null) {
 				System.out.println("Customer: " + i + c);
