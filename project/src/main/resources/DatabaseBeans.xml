@@ -26,6 +26,7 @@
 		<property name="initialSize" value="5" />
 		<property name="maxTotal" value="10" />
 	</bean>
+	
 
 	<!-- jpa container -->
 	<bean id="emf"
@@ -44,7 +45,6 @@
 		<property name="generateDdl" value="false" />
 		<property name="databasePlatform"
 			value="org.hibernate.dialect.MySQLDialect" />
-			<!-- <property name="current_session_context_class"/> -->
 	</bean>
 
 	<!-- persistence -->

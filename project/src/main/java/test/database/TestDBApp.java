@@ -72,24 +72,29 @@ public class TestDBApp {
 
 		CustomersWorker cuw = (CustomersWorker) context.getBean("customersWorker");
 
-		Utility u = new Utility();
-		u.setName("Cold water");
-		u.setPrice(2.34);
+//		Utility u = new Utility();
+//		u.setName("Cold water");
+//		u.setPrice(2.34);
 
 		UtilitiesWorker uw = (UtilitiesWorker) context.getBean("utilitiesWorker");
-		uw.addUtility(u);
+//		uw.addUtility(u);
 
 		UtilityBill ub = new UtilityBill();
 		Customer c = cuw.getCustomerByIdFromDb(1);
 
+		System.out.println(c);
+		
 		ub.setCustomer(c);
 //		
 //		u = uw.getUtilityFromDb(0);
 //		
-		System.out.println(u);
+//		System.out.println(u);
 //		
-		ub.setUtility(u);
-		ub.setAmount(3.14);
+		ub.setUtility(uw.getUtilityFromDb(1));
+		
+		System.out.println(ub.getUtility());
+		
+		ub.setAmount(6.8);
 //		
 		UtilityBillsWorker ubw = (UtilityBillsWorker) context.getBean("utilityBillsWorker");
 		ubw.addUtilityBill(ub);

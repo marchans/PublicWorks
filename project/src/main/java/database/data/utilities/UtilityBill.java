@@ -13,7 +13,7 @@ public class UtilityBill {
 	@Column(name = "bill_id")
 	private int billId;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "utility_id")
 	private Utility utility;
 	

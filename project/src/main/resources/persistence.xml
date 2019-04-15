@@ -5,6 +5,17 @@
 	<persistence-unit name="myUnit"
 		transaction-type="RESOURCE_LOCAL">
 		
+		<class>database.data.roles.Customer</class>
+		<class>database.data.users.User</class>
+		<class>database.data.roles.workers.ServiceWorker</class>
+		<class>database.data.roles.workers.Position</class>
+		
+		<class>database.data.utilities.Utility</class>
+		<class>database.data.utilities.UtilityBill</class>
+		
+		<class>database.data.requests.Request</class>
+		
 	</persistence-unit>
+
 
 </persistence>

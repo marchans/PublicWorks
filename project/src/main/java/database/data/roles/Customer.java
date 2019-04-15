@@ -281,8 +281,7 @@ public class Customer {
 	public String toString() {
 		return "Customer [id=" + id + ", user=" + user + ", passport=" + passport + ", itn=" + itn + ", county="
 				+ county + ", city=" + city + ", district=" + district + ", street=" + street + ", number=" + number
-				+ ", aptNumber=" + aptNumber + ", area=" + area + ", accountNumber=" + accountNumber + ", utilityBills="
-				+ utilityBills + "]";
+				+ ", aptNumber=" + aptNumber + ", area=" + area + ", accountNumber=" + accountNumber + "]";
 	}
 	
 }
