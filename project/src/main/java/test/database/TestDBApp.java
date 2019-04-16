@@ -20,25 +20,25 @@ import java.util.List;
 public class TestDBApp {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
-		User u = new User();
-		u.setFirstName("Jay");
-		u.setLastName("Worker");
-		u.setEmail("admin@worker.gmail.com");
-		u.setPhone("0445554446");
-
-		UsersWorker uw = (UsersWorker) context.getBean("usersWorker");
-		uw.addUser(u);
+//		ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
+//		User u = new User();
+//		u.setFirstName("Jay");
+//		u.setLastName("Worker");
+//		u.setEmail("admin@worker.gmail.com");
+//		u.setPhone("0445554446");
 //
+//		UsersWorker uw = (UsersWorker) context.getBean("usersWorker");
+//		uw.addUser(u);
+////
 //		Login lu = new Login();
 //		lu.setUser(u);
-//		lu.setLogin("adminushka");
-//		lu.setPassword("slozna");
-//		lu.setRole("ROLE_ADMIN");
-//
+//		lu.setLogin("testcustomer3");
+//		lu.setPassword("legko");
+//		lu.setRole("ROLE_USER");
+////
 //		LoginsWorker lw = (LoginsWorker) context.getBean("loginsWorker");
 //		lw.addLogin(lu);
-//
+////
 //		ServiceWorkersWorker sww = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
 //		ServiceWorker sw = new ServiceWorker();
 //		Position p = new Position();
@@ -52,15 +52,15 @@ public class TestDBApp {
 
 //        Customer cu = new Customer();
 //        cu.setUser(u);
-//        cu.setAccountNumber(011);
+//        cu.setAccountNumber(12343);
 //        cu.setAptNumber(1);
 //        cu.setArea(33);
 //        cu.setCity("Kiev");
 //        cu.setCounty("Kiev");
 //        cu.setDistrict("Podil");
-//        cu.setItn(337);
+//        cu.setItn(33721313);
 //        cu.setNumber(3);
-//        cu.setPassport("A1111");
+//        cu.setPassport("A332323");
 //        cu.setStreet("Khreshchatyk");
 //        System.out.println(cu);
 		

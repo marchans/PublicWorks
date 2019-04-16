@@ -86,7 +86,7 @@ public class DataBaseWorkerDaoJPA implements DataBaseWorkerDao {
         workerUser.setPhone(workerJson.get("phone").getAsString());
         workerUserLogin.setLogin(workerJson.get("login").getAsString());
         workerUserLogin.setPassword(workerJson.get("password").getAsString());
-        workerUserLogin.setEnabled(true);
+        workerUserLogin.setEnabled(1);
         workerUserLogin.setRole("ROLE_WORKER");
         workerUserLogin.setUser(workerUser);
         workerPosition.setPositionId(workerJson.get("positionId").getAsInt());

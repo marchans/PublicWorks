@@ -25,7 +25,7 @@ public class Login {
 	private String role;
 
 	@Column(name="enabled")
-	private boolean enabled;
+	private int enabled;
 	
 	
 	
@@ -103,11 +103,11 @@ public class Login {
 		this.id = id;
 	}
 
-	public boolean isEnabled() {
+	public int getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
 }

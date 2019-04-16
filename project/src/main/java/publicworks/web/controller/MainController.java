@@ -1,5 +1,9 @@
 package publicworks.web.controller;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import database.workers.CustomersWorker;
 import database.workers.DataBaseWorker;
+import database.workers.ServiceWorkersWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -8,9 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
@@ -20,6 +22,8 @@ public class MainController {
 
 	@Autowired private ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
 	DataBaseWorker dbw = (DataBaseWorker)context.getBean("dataBaseWorker");
+	ServiceWorkersWorker sww = (ServiceWorkersWorker)context.getBean("serviceWorkersWorker");
+	CustomersWorker cw = (CustomersWorker)context.getBean("customersWorker");
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
@@ -49,6 +53,69 @@ public class MainController {
 
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		mav.addObject("data", dbw.getAllWorkersFromDatabaseGson());
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/admin/getRequestsList", method = RequestMethod.GET)
+	public ModelAndView getRequests() {
+
+
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("data", cw.getAllUnverifiedCustomersFromDatabaseGson());
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/admin/deleteWorker/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteWorker(@PathVariable String id) {
+
+
+		sww.deleteServiceWorker(Integer.parseInt(id));
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("data", "success");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/admin/registration-accept/{id}", method = RequestMethod.GET)
+	public ModelAndView accept(@PathVariable String id) {
+
+		cw.acceptUnverifiedCustomer(Integer.parseInt(id));
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("data", "success");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/admin/registration-decline/{id}", method = RequestMethod.GET)
+	public ModelAndView decline(@PathVariable String id) {
+
+		cw.rejectUnverifiedCustomer(Integer.parseInt(id));
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("data", "success");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/admin/addWorker", method = RequestMethod.POST)
+	public ModelAndView addWorker(@RequestBody String jsonString) {
+
+		JsonParser jsonParser = new JsonParser();
+		JsonObject jo = (JsonObject)jsonParser.parse(jsonString);
+		sww.addNewWorkerToDatabase(jo);
+
+		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+		mav.addObject("data", "success");
 
 		return mav;
 
@@ -90,11 +157,9 @@ public class MainController {
 			
 		}
 
-		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
-		mav.addObject("key1", "value1");
-		mav.addObject("key2", "value2");
+		model.setViewName("403");
 
-		return mav;
+		return model;
 
 	}
 

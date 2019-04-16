@@ -34,34 +34,111 @@ AdminPage.prototype.initEventListeners = function() {
         self.removeAll();
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/getWorkersList', false);
+        xhr.open('GET', '/project_war/admin/getWorkers', false);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
             if (xhr.status != 200) {
-                alert("s");
+                alert("Problem occured");
             } else {
-                alert(xhr.responseText);
+                self.workListEl.classList.remove('disp-none');
+                var data = JSON.parse(xhr.responseText);
+                data = JSON.parse(data.data);
+                var template = document.querySelector('#worker-template');
+                self.workListEl.innerHTML = '';
+                data.forEach(function (worker) {
+                    var clone = template.content.cloneNode(true);
+                    clone.querySelector('.w-name').textContent = worker.user.firstName;
+                    clone.querySelector('.w-surname').textContent = worker.user.lastName;
+                    clone.querySelector('.w-address').textContent = worker.user.email;
+                    clone.querySelector('.w-tel').textContent = worker.user.phone;
+                    clone.querySelector('.worker-edit').setAttribute('id',worker.workerId);
+                    var cloneId = clone.querySelector('.worker-edit').getAttribute('id');
+                    clone.querySelector('.worker-registration__submit-button').addEventListener('click', function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '/project_war/admin/deleteWorker/' + cloneId , false);
+
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState != 4) return;
+                            if (xhr.status != 200) {
+                                alert(xhr.status + ': ' + xhr.statusText);
+                            } else {
+                                var event = new Event("click");
+                                self.listButtonEl.dispatchEvent(event);
+                            }
+                        };
+
+                        xhr.send();
+                    });
+
+                    self.workListEl.appendChild(clone);
+                }) ;
             }
         };
 
         xhr.send();
-
-        self.workListEl.classList.remove('disp-none');
     });
 
     this.requestButtonEl.addEventListener('click', function () {
         self.removeAll();
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/getRequestsList', false);
+        xhr.open('GET', '/project_war/admin/getRequestsList', false);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
             if (xhr.status != 200) {
-                alert("s");
+                alert("Problem occured");
             } else {
-                alert(xhr.responseText);
+                self.requestListEl.classList.remove('disp-none');
+                var data = JSON.parse(xhr.responseText);
+                data = JSON.parse(data.data);
+                var template = document.querySelector('#request-template');
+                self.requestListEl.innerHTML = '';
+                data.forEach(function (request) {
+                    var clone = template.content.cloneNode(true);
+                    clone.querySelector('.w-name').textContent = request.user.firstName;
+                    clone.querySelector('.w-surname').textContent = request.user.lastName;
+                    clone.querySelector('.w-passport').textContent = request.passport;
+                    clone.querySelector('.w-town').textContent = request.street;
+                    clone.querySelector('.request__person').setAttribute('id',request.user.userId);
+                    var cloneId = clone.querySelector('.request__person').getAttribute('id');
+                    clone.querySelector('.but-accept').addEventListener('click', function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '/project_war/admin/registration-accept/' + cloneId , false);
+
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState != 4) return;
+                            if (xhr.status != 200) {
+                                alert(xhr.status + ': ' + xhr.statusText);
+                            } else {
+                                var event = new Event("click");
+                                self.requestButtonEl.dispatchEvent(event);
+                            }
+                        };
+
+                        xhr.send();
+                    });
+
+                    clone.querySelector('.but-decline').addEventListener('click', function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '/project_war/admin/registration-decline/' + cloneId , false);
+
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState != 4) return;
+                            if (xhr.status != 200) {
+                                alert(xhr.status + ': ' + xhr.statusText);
+                            } else {
+                                var event = new Event("click");
+                                self.requestButtonEl.dispatchEvent(event);
+                            }
+                        };
+
+                        xhr.send();
+                    });
+
+                    self.requestListEl.appendChild(clone);
+                }) ;
             }
         };
 
@@ -73,106 +150,115 @@ AdminPage.prototype.initEventListeners = function() {
 
     // Register worker js
     this.regFormEl.addEventListener('submit', function (evt) {
+        var token = document.querySelector('#logoutForm').querySelector('input').getAttribute('value');
         evt.preventDefault();
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/addWorker', true);
-        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.open('POST', '/project_war/admin/addWorker', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-Token', token);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
             if (xhr.status != 200) {
-                // alert(xhr.status + ': ' + xhr.statusText);
+                alert(xhr.status + ': ' + xhr.statusText);
             } else {
-                alert(xhr.responseText);
-            }
+                self.regFormEl.reset();
+                var event = new Event("click");
+                self.listButtonEl.dispatchEvent(event);
+
+                                }
         };
         var formData = new FormData(self.regFormEl);
-        console.log(formData);
-        xhr.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
+        var object = {};
+        formData.forEach(function(value, key){
+            object[key] = value;
+        });
+        var json = JSON.stringify(object);
+        xhr.send(json);
     });
 
     // Edit worker js
-    this.workerEdit.forEach(function (item) {
-        var label = item.querySelectorAll('.worker-registration__label');
-        var saveBut = item.querySelector('.worker-edit__save');
-        label.forEach(function (i) {
-            var text = i.querySelector('.worker-registration__title');
-            var input = i.querySelector('.worker-registration__input');
-            text.addEventListener('click', function () {
-                text.classList.add('disp-none');
-                input.classList.remove('disp-none');
-                saveBut.classList.remove('disp-none');
-                console.log(saveBut);
-            });
-
-            input.addEventListener('blur', function () {
-                text.classList.remove('disp-none');
-                input.classList.add('disp-none');
-                if(input.value !== '') text.textContent = input.value;
-            });
-
-        });
-
-        saveBut.addEventListener('click', function () {
-            var name = item.querySelector('.w-name').textContent;
-            var surname = item.querySelector('.w-surname').textContent;
-            var address = item.querySelector('.w-address').textContent;
-            var tel = item.querySelector('.w-tel').textContent;
-            var login = item.querySelector('.w-login').textContent;
-            var pass = item.querySelector('.w-pass').textContent;
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('UPDATE', '/updateWorker', true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState != 4) return;
-                if (xhr.status != 200) {
-                    alert(JSON.stringify({name:name, surname:surname, address:address, tel:tel, login:login, pass:pass}));
-                } else {
-                    alert(xhr.responseText);
-                    saveBut.classList.add('disp-none');
-                }
-            };
-
-            xhr.send(JSON.stringify({name:name, surname:surname, address:address, tel:tel, login:login, pass:pass}));
-        });
-    });
+    // this.workerEdit.forEach(function (item) {
+    //     var label = item.querySelectorAll('.worker-registration__label');
+    //     var saveBut = item.querySelector('.worker-edit__save');
+    //     label.forEach(function (i) {
+    //         var text = i.querySelector('.worker-registration__title');
+    //         var input = i.querySelector('.worker-registration__input');
+    //         text.addEventListener('click', function () {
+    //             text.classList.add('disp-none');
+    //             input.classList.remove('disp-none');
+    //             saveBut.classList.remove('disp-none');
+    //             console.log(saveBut);
+    //         });
+    //
+    //         input.addEventListener('blur', function () {
+    //             text.classList.remove('disp-none');
+    //             input.classList.add('disp-none');
+    //             if(input.value !== '') text.textContent = input.value;
+    //         });
+    //
+    //     });
+    //
+    //     saveBut.addEventListener('click', function () {
+    //         var name = item.querySelector('.w-name').textContent;
+    //         var surname = item.querySelector('.w-surname').textContent;
+    //         var address = item.querySelector('.w-address').textContent;
+    //         var tel = item.querySelector('.w-tel').textContent;
+    //         var login = item.querySelector('.w-login').textContent;
+    //         var pass = item.querySelector('.w-pass').textContent;
+    //
+    //         var xhr = new XMLHttpRequest();
+    //         xhr.open('UPDATE', '/updateWorker', true);
+    //         xhr.setRequestHeader("Content-Type", "application/json");
+    //
+    //         xhr.onreadystatechange = function() {
+    //             if (xhr.readyState != 4) return;
+    //             if (xhr.status != 200) {
+    //                 alert(JSON.stringify({name:name, surname:surname, address:address, tel:tel, login:login, pass:pass}));
+    //             } else {
+    //                 alert(xhr.responseText);
+    //                 saveBut.classList.add('disp-none');
+    //             }
+    //         };
+    //
+    //         xhr.send(JSON.stringify({name:name, surname:surname, address:address, tel:tel, login:login, pass:pass}));
+    //     });
+    // });
 
     //Requests for registration js
-    this.requestListEl.querySelectorAll('.request__item').forEach(function (el) {
-        el.querySelector('.but-accept').addEventListener('click',function () {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/registration-accept?id', true);
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState != 4) return;
-                if (xhr.status != 200) {
-                    alert("s");
-                } else {
-                    alert(xhr.responseText);
-                }
-            };
-
-            xhr.send();
-        });
-
-        el.querySelector('.but-decline').addEventListener('click',function () {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/registration-decline?id', true);
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState != 4) return;
-                if (xhr.status != 200) {
-                    alert("s");
-                } else {
-                    alert(xhr.responseText);
-                }
-            };
-
-            xhr.send();
-        });
-    });
+    // this.requestListEl.querySelectorAll('.request__item').forEach(function (el) {
+    //     el.querySelector('.but-accept').addEventListener('click',function () {
+    //         var xhr = new XMLHttpRequest();
+    //         xhr.open('GET', '/registration-accept?id', true);
+    //
+    //         xhr.onreadystatechange = function() {
+    //             if (xhr.readyState != 4) return;
+    //             if (xhr.status != 200) {
+    //                 alert("s");
+    //             } else {
+    //                 alert(xhr.responseText);
+    //             }
+    //         };
+    //
+    //         xhr.send();
+    //     });
+    //
+    //     el.querySelector('.but-decline').addEventListener('click',function () {
+    //         var xhr = new XMLHttpRequest();
+    //         xhr.open('GET', '/registration-decline?id', true);
+    //
+    //         xhr.onreadystatechange = function() {
+    //             if (xhr.readyState != 4) return;
+    //             if (xhr.status != 200) {
+    //                 alert("s");
+    //             } else {
+    //                 alert(xhr.responseText);
+    //             }
+    //         };
+    //
+    //         xhr.send();
+    //     });
+    // });
 
 };
 

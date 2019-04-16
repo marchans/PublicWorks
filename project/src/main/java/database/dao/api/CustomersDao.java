@@ -8,4 +8,11 @@ public interface CustomersDao {
 	Customer getCustomer(int id);
 
 	void saveCustomer(Customer customer);
+
+	String getAllUnverifiedCustomersFromDatabaseGson();
+
+	void acceptUnverifiedCustomer(int customer_id);
+
+	void rejectUnverifiedCustomer(int customer_id);
+
 }
