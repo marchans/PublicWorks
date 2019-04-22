@@ -1,4 +1,5 @@
 package publicworks.web.controller;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import database.workers.CustomersWorker;
@@ -20,17 +21,18 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 @Controller
 public class MainController {
 
-	@Autowired private ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
-	DataBaseWorker dbw = (DataBaseWorker)context.getBean("dataBaseWorker");
-	ServiceWorkersWorker sww = (ServiceWorkersWorker)context.getBean("serviceWorkersWorker");
-	CustomersWorker cw = (CustomersWorker)context.getBean("customersWorker");
+	@Autowired
+	private ApplicationContext context = new ClassPathXmlApplicationContext("DatabaseBeans.xml");
+	DataBaseWorker dbw = (DataBaseWorker) context.getBean("dataBaseWorker");
+	ServiceWorkersWorker sww = (ServiceWorkersWorker) context.getBean("serviceWorkersWorker");
+	CustomersWorker cw = (CustomersWorker) context.getBean("customersWorker");
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
 
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "This is default page!");
+		model.addObject("title", "JavaEE project");
+		model.addObject("message", "Spring, 2019");
 		model.setViewName("hello");
 		return model;
 
@@ -40,13 +42,32 @@ public class MainController {
 	public ModelAndView adminPage() {
 
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
-		model.addObject("message", "This page is for ROLE_ADMIN only!");
 		model.setViewName("admin");
 
 		return model;
 
 	}
+
+	@RequestMapping(value = "/user**", method = RequestMethod.GET)
+	public ModelAndView userPage() {
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("user");
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/worker**", method = RequestMethod.GET)
+	public ModelAndView workerPage() {
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("worker");
+		
+		return model;
+	}
+	
+	
+
 
 	@RequestMapping(value = "/admin/getWorkers", method = RequestMethod.GET)
 	public ModelAndView getWorkers() {
@@ -61,8 +82,6 @@ public class MainController {
 	@RequestMapping(value = "/admin/getRequestsList", method = RequestMethod.GET)
 	public ModelAndView getRequests() {
 
-
-
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		mav.addObject("data", cw.getAllUnverifiedCustomersFromDatabaseGson());
 
@@ -72,7 +91,6 @@ public class MainController {
 
 	@RequestMapping(value = "/admin/deleteWorker/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteWorker(@PathVariable String id) {
-
 
 		sww.deleteServiceWorker(Integer.parseInt(id));
 
@@ -111,7 +129,7 @@ public class MainController {
 	public ModelAndView addWorker(@RequestBody String jsonString) {
 
 		JsonParser jsonParser = new JsonParser();
-		JsonObject jo = (JsonObject)jsonParser.parse(jsonString);
+		JsonObject jo = (JsonObject) jsonParser.parse(jsonString);
 		sww.addNewWorkerToDatabase(jo);
 
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
@@ -121,7 +139,7 @@ public class MainController {
 
 	}
 
-	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
 
@@ -138,23 +156,23 @@ public class MainController {
 		return model;
 
 	}
-	
-	//for 403 access denied page
-	@RequestMapping(value = "/403", method = {RequestMethod.GET, RequestMethod.POST})
+
+	// for 403 access denied page
+	@RequestMapping(value = "/403", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView accesssDenied() {
 
 		ModelAndView model = new ModelAndView();
-		
-		//check if user is login
+
+		// check if user is login
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			System.out.println("User has authorities: " );
+			System.out.println("User has authorities: ");
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
-			
+
 			System.out.println(userDetail);
-		
+
 			model.addObject("login", userDetail.getUsername());
-			
+
 		}
 
 		model.setViewName("403");

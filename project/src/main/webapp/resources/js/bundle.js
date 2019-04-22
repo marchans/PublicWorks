@@ -34,7 +34,7 @@ AdminPage.prototype.initEventListeners = function() {
         self.removeAll();
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/project_war/admin/getWorkers', false);
+        xhr.open('GET', '/project/admin/getWorkers', false);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
@@ -56,7 +56,7 @@ AdminPage.prototype.initEventListeners = function() {
                     var cloneId = clone.querySelector('.worker-edit').getAttribute('id');
                     clone.querySelector('.worker-registration__submit-button').addEventListener('click', function () {
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '/project_war/admin/deleteWorker/' + cloneId , false);
+                        xhr.open('GET', '/project/admin/deleteWorker/' + cloneId , false);
 
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState != 4) return;
@@ -83,7 +83,7 @@ AdminPage.prototype.initEventListeners = function() {
         self.removeAll();
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/project_war/admin/getRequestsList', false);
+        xhr.open('GET', '/project/admin/getRequestsList', false);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
@@ -105,7 +105,7 @@ AdminPage.prototype.initEventListeners = function() {
                     var cloneId = clone.querySelector('.request__person').getAttribute('id');
                     clone.querySelector('.but-accept').addEventListener('click', function () {
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '/project_war/admin/registration-accept/' + cloneId , false);
+                        xhr.open('GET', '/project/admin/registration-accept/' + cloneId , false);
 
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState != 4) return;
@@ -122,7 +122,7 @@ AdminPage.prototype.initEventListeners = function() {
 
                     clone.querySelector('.but-decline').addEventListener('click', function () {
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', '/project_war/admin/registration-decline/' + cloneId , false);
+                        xhr.open('GET', '/project/admin/registration-decline/' + cloneId , false);
 
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState != 4) return;
@@ -153,7 +153,7 @@ AdminPage.prototype.initEventListeners = function() {
         var token = document.querySelector('#logoutForm').querySelector('input').getAttribute('value');
         evt.preventDefault();
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/project_war/admin/addWorker', true);
+        xhr.open('POST', '/project/admin/addWorker', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-Token', token);
 
@@ -264,11 +264,17 @@ AdminPage.prototype.initEventListeners = function() {
 
 function WorkerPage(el) {
     this.el = el;
+    this.exitEl = document.querySelector('.navbar--exit');
     this.requestsBut = this.el.querySelector('.requests-but');
     this.initEventListeners();
 }
 
 WorkerPage.prototype.initEventListeners = function() {
+	this.exitEl.addEventListener('click',function (e) {
+        e.preventDefault();
+        document.querySelector('#logoutForm').submit();
+    });
+	
     var self = this;
     this.requestsBut.addEventListener('click', function () {
         var xhr = new XMLHttpRequest();
@@ -349,6 +355,7 @@ WorkerPage.prototype.initEventListeners = function() {
 
 function UserPage(el) {
     this.el = el;
+    this.exitEl = document.querySelector('.navbar--exit');
     this.makePaymentButtonEl = this.el.querySelector('.make-payment-js');
     this.paymentFormEl = this.el.querySelector('.payment-form');
     this.submitPaymentButtonEl = this.el.querySelector('.payment-form__submit');
@@ -371,6 +378,12 @@ UserPage.prototype.removeAll = function () {
 };
 
 UserPage.prototype.initEventListeners = function() {
+	
+	 this.exitEl.addEventListener('click',function (e) {
+	        e.preventDefault();
+	        document.querySelector('#logoutForm').submit();
+	    });
+	 
     var self = this;
     this.makeDeclarationButtonEl.addEventListener('click', function () {
         self.removeAll();
