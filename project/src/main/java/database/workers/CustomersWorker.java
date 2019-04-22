@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import database.dao.api.CustomersDao;
 import database.data.roles.Customer;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.SUPPORTS)
 public class CustomersWorker {
 	@Autowired
 	CustomersDao customersDao;
@@ -15,6 +18,7 @@ public class CustomersWorker {
 		return customer;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public String getAllUnverifiedCustomersFromDatabaseGson(){
 		return customersDao.getAllUnverifiedCustomersFromDatabaseGson();
 	}

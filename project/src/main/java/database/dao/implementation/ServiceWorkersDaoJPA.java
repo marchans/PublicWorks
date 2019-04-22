@@ -13,6 +13,7 @@ import database.workers.ServiceWorkersWorker;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
@@ -71,7 +72,5 @@ public class ServiceWorkersDaoJPA implements ServiceWorkersDao {
 		ServiceWorker toDelete = em.find(ServiceWorker.class, worker_id);
 		int user_id = toDelete.getUser().getUserId();
 		em.remove(em.find(User.class, user_id));
-
-		System.out.println("Worker successfully removed.");
 	}
 }

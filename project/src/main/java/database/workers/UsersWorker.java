@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import database.dao.api.UsersDao;
 import database.data.users.User;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.SUPPORTS)
 public class UsersWorker {
 	@Autowired
 	UsersDao usersDao;
@@ -15,6 +18,7 @@ public class UsersWorker {
 		return user;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public User getUserFromDb(int userId) {
 		return usersDao.getUser(userId);
 	}
